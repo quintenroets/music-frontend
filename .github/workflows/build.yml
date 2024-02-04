@@ -1,0 +1,13 @@
+name: Build
+
+on:
+  push:
+
+jobs:
+  build:
+    permissions:
+      contents: write  # Needed for GitHub publishing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish npm project to GitHub
+        uses: quintenroets/package-dev-tools/actions/publish/npm@main

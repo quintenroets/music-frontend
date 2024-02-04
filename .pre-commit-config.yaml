@@ -1,0 +1,29 @@
+fail_fast: true
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: end-of-file-fixer
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+  - repo: local
+    hooks:
+      - id: install dependencies
+        name: install dependencies
+        entry: npm install
+        language: system
+        pass_filenames: false
+  - repo: local
+    hooks:
+      - id: lint-source-code
+        name: lint source code
+        entry: npm run lint
+        language: system
+        pass_filenames: false
+
+ci:
+    autofix_commit_msg: auto fixes from pre-commit.com hooks
+    autoupdate_commit_msg: 'pre-commit autoupdate'
