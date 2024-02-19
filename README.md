@@ -1,4 +1,4 @@
-# frontend
+# Music
 
 ## Project setup
 ```
