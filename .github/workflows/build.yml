@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Publish npm project to GitHub
-        uses: quintenroets/package-dev-tools/actions/publish/npm@main
+        uses: quintenroets/actions/publish/npm@main
