@@ -48,7 +48,7 @@ class MusicService {
   }
 
   getArtists() {
-    return http.get("/artists/").then((response) => {
+    return http.get("/artists").then((response) => {
       return response.data;
     });
   }
