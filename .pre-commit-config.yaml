@@ -5,19 +5,14 @@ repos:
     rev: v4.6.0
     hooks:
       - id: end-of-file-fixer
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
-    hooks:
       - id: trailing-whitespace
   - repo: local
     hooks:
-      - id: install dependencies
+      - id: install-dependencies
         name: install dependencies
         entry: npm install
         language: system
         pass_filenames: false
-  - repo: local
-    hooks:
       - id: lint-source-code
         name: lint source code
         entry: npm run lint
@@ -27,3 +22,5 @@ repos:
 ci:
     autofix_commit_msg: auto fixes from pre-commit.com hooks
     autoupdate_commit_msg: 'pre-commit autoupdate'
+    autoupdate_schedule: monthly
+    skip: [install-dependencies, lint-source-code]
