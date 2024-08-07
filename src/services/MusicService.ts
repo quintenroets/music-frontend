@@ -18,19 +18,19 @@ class MusicService {
   }
   addArtist(id, name) {
     return http
-      .get("/artists/add", { params: { id: id, name: name } })
+      .get("/artists/add", { params: { id_: id, name: name } })
       .then((response) => {
         return response.data;
       });
   }
   addSong(id) {
-    return http.get("/songs/add", { params: { id: id } }).then((response) => {
+    return http.get("/songs/add", { params: { id_: id } }).then((response) => {
       return response.data;
     });
   }
   ChangeArtist(id) {
     return http
-      .get("/artists/toggle", { params: { id: id } })
+      .get("/artists/toggle", { params: { id_: id } })
       .then((response) => {
         return response.data;
       });
