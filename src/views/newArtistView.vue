@@ -1,7 +1,7 @@
 <template>
   <NewItemView
-    :fetch-function="MusicService().getNewArtist"
-    :fetch-recommendations-function="MusicService().getRecommendedArtists"
+    :fetch-function="MusicService().fetchNewArtist"
+    :fetch-recommendations-function="MusicService().fetchRecommendedArtists"
     item-name="artist"
     :item-component="NewArtistTile"
   />
