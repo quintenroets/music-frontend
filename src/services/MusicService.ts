@@ -2,14 +2,14 @@
 import http from "./HttpService.ts";
 
 class MusicService {
-  getNewArtist(name) {
+  fetchNewArtist(name) {
     return http
       .get("/artists/search", { params: { name: name } })
       .then((response) => {
         return response.data;
       });
   }
-  getNewSongs(name) {
+  fetchNewSongs(name) {
     return http
       .get("/songs/search", { params: { name: name } })
       .then((response) => {
@@ -36,19 +36,19 @@ class MusicService {
       });
   }
 
-  getRecommendedArtists() {
+  fetchRecommendedArtists() {
     return http.get("/artists/recommendations").then((response) => {
       return response.data;
     });
   }
-  getRecommendedSongs() {
+  fetchRecommendedSongs() {
     return http.get("/songs/recommendations").then((response) => {
       return response.data;
     });
   }
 
-  getArtists() {
-    return http.get("/artists").then((response) => {
+  fetchArtists(offset) {
+    return http.get("/artists", {params: {offset: offset}}).then((response) => {
       return response.data;
     });
   }

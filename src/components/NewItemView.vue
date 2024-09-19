@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div ref="scrollContainer" class="flex flex-col" @scroll="onScroll">
     <h3 class="mt-4 mb-8">{{ message }}</h3>
     <div class="flex justify-center">
       <div class="flex justify-center relative px-16 w-full max-w-lg">
@@ -24,14 +24,8 @@
         </div>
       </div>
     </div>
-    <div class="w-full flex justify-center mt-10">
+    <div class="w-full mt-10">
       <div class="vl-parent w-full h-full flex justify-center">
-        <loading
-          class="mt-10"
-          :active="waitingrecommendations"
-          :is-full-page="false"
-          color="white"
-        />
         <div class="inline-block overflow-y-auto">
           <component
             v-for="item in newItems"
@@ -48,6 +42,13 @@
           />
         </div>
       </div>
+      <div class="w-full flex justify-center">
+        <loading
+          :active="waitingRecommendations"
+          :is-full-page="false"
+          color="white"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -63,8 +64,8 @@ export default {
       input: "",
       waiting: false,
       newItems: {},
-      recommendedItems: {},
-      waitingrecommendations: true,
+      recommendedItems: [],
+      waitingRecommendations: true,
     };
   },
   components: {
@@ -101,15 +102,25 @@ export default {
         });
       }
     },
-    setRecommendations: function () {
+    addRecommendations: function () {
+      this.waitingRecommendations = true;
       this.fetchRecommendationsFunction().then((response) => {
-        this.recommendedItems = response;
-        this.waitingrecommendations = false;
+        this.recommendedItems.push(...response);
+        this.waitingRecommendations = false;
       });
+    },
+    onScroll: function () {
+      let scrollHeight =
+        this.$refs.scrollContainer.scrollTop +
+        this.$refs.scrollContainer.clientHeight;
+      let containerHeight = this.$refs.scrollContainer.scrollHeight - 100;
+      if (scrollHeight >= containerHeight && !this.waitingRecommendations) {
+        this.addRecommendations();
+      }
     },
   },
   mounted() {
-    this.setRecommendations();
+    this.addRecommendations();
   },
 };
 </script>
