@@ -1,43 +1,35 @@
 <template>
   <div ref="scrollContainer" class="flex flex-col" @scroll="onScroll">
-    <h3 class="mt-4 mb-8">{{ message }}</h3>
-    <div class="flex justify-center">
-      <div class="flex justify-center relative px-16 w-full max-w-lg">
-        <input
-          aria-label="search"
-          class="bg-gray-300 text-black h-12 w-full text-center px-10 rounded"
-          @input="onInput(input)"
-          autofocus
-          v-model="input"
-          v-on:keydown.enter="onInput(input)"
-        />
-      </div>
-      <div class="flex justify-center items-center">
-        <div class="absolute -translate-x-6 vl-parent flex-col justify-center">
-          <loading
-            :active="waiting"
-            :is-full-page="false"
-            color="white"
-            :height="30"
-          />
-          <div />
-        </div>
-      </div>
-    </div>
+    <SearchBarComponent
+      :waiting="waiting"
+      :item-name="itemName"
+      @input-changed="onInput"
+      :key="itemComponent"
+    >
+      <template #between>
+        <slot name="between"></slot>
+      </template>
+    </SearchBarComponent>
     <div class="w-full mt-10">
       <div class="vl-parent w-full h-full flex justify-center">
         <div class="inline-block overflow-y-auto">
-          <component
-            v-for="item in newItems"
-            :key="item.id"
-            :is="itemComponent"
-            v-bind="{ [itemName]: item }"
-          />
+          <div :key="itemComponent">
+            <component
+              v-for="item in newItems"
+              :key="item.id"
+              :is="itemComponent"
+              v-bind="{ [itemName]: item }"
+            />
+          </div>
           <br />
           <component
             v-for="item in recommendedItems"
             :key="item.id"
-            :is="itemComponent"
+            :is="
+              recommendedItemComponent === null
+                ? itemComponent
+                : recommendedItemComponent
+            "
             v-bind="{ [itemName]: item }"
           />
         </div>
@@ -55,21 +47,22 @@
 
 <script>
 import Loading from "vue-loading-overlay";
+import SearchBarComponent from "./searchBarComponent.vue";
 
 export default {
   name: "NewItemView",
   data: function () {
     return {
-      message: "Search new " + this.itemName,
-      input: "",
       waiting: false,
       newItems: {},
       recommendedItems: [],
       waitingRecommendations: true,
+      newInput: null,
     };
   },
   components: {
     Loading,
+    SearchBarComponent,
   },
 
   props: {
@@ -81,26 +74,41 @@ export default {
       type: Object,
       required: true,
     },
+    recommendedItemComponent: {
+      type: Object,
+      default: null,
+    },
     fetchFunction: {
       type: Function,
-      required: true,
     },
     fetchRecommendationsFunction: {
       type: Function,
-      required: true,
     },
   },
   methods: {
     onInput: function (input) {
-      if (input === "") {
+      if (input === "" || input === undefined) {
         this.newItems = [];
       } else {
-        this.waiting = true;
-        this.fetchFunction(input).then((response) => {
-          this.newItems = response;
-          this.waiting = false;
-        });
+        if (this.waiting === true) {
+          this.newInput = input;
+        } else {
+          this.fetchInput(input);
+        }
       }
+    },
+    fetchInput: function (input) {
+      this.waiting = true;
+      this.fetchFunction(input).then((response) => {
+        this.newItems = response;
+        if (this.newInput === null) {
+          this.waiting = false;
+        } else {
+          input = this.newInput;
+          this.newInput = null;
+          this.fetchInput(input);
+        }
+      });
     },
     addRecommendations: function () {
       this.waitingRecommendations = true;
@@ -117,6 +125,11 @@ export default {
       if (scrollHeight >= containerHeight && !this.waitingRecommendations) {
         this.addRecommendations();
       }
+    },
+  },
+  watch: {
+    itemComponent() {
+      this.newItems = [];
     },
   },
   mounted() {

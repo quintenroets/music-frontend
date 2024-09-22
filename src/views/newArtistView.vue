@@ -1,6 +1,6 @@
 <template>
   <NewItemView
-    :fetch-function="MusicService().fetchNewArtist"
+    :fetch-function="MusicService().searchNewArtists"
     :fetch-recommendations-function="MusicService().fetchRecommendedArtists"
     item-name="artist"
     :item-component="NewArtistTile"
@@ -10,7 +10,7 @@
 <script>
 import MusicService from "../services/MusicService.ts";
 import NewItemView from "@/components/NewItemView.vue";
-import NewArtistTile from "@/components/tiles/NewArtistTile.vue";
+import NewArtistTile from "@/components/tiles/spotify/newArtistTile.vue";
 
 export default {
   name: "NewArtist",

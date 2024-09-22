@@ -1,5 +1,5 @@
 <template>
-  <NewItemTile
+  <ItemTile
     v-bind:name="artist.name"
     v-bind:id="artist.id"
     v-bind:popularity="artist.popularity"
@@ -12,12 +12,12 @@
     <template #top-right-image>
       <img src="@/assets/favorite.png" alt="checkmark" v-if="favorite" />
     </template>
-  </NewItemTile>
+  </ItemTile>
 </template>
 
 <script>
-import MusicService from "../../services/MusicService.ts";
-import NewItemTile from "./NewItemTile.vue";
+import MusicService from "../../../services/MusicService.ts";
+import ItemTile from "./itemTile.vue";
 
 export default {
   name: "ArtistTile",
@@ -40,7 +40,7 @@ export default {
     },
   },
   components: {
-    NewItemTile,
+    ItemTile,
   },
 };
 </script>
