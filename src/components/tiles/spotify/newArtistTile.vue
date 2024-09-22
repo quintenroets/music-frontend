@@ -6,22 +6,16 @@
     v-bind:images="artist.images"
     v-bind:genres="artist.genres"
     v-bind:selected="selected"
+    v-bind:show-checkmark="artist.added || finished"
     type="artist"
     @click="onSelect"
   >
-    <template #top-right-image>
-      <img
-        src="@/assets/checkmark.png"
-        alt="checkmark"
-        v-if="artist.added || finished"
-      />
-    </template>
   </NewItemTile>
 </template>
 
 <script>
-import MusicService from "../../services/MusicService.ts";
-import NewItemTile from "./NewItemTile.vue";
+import MusicService from "../../../services/MusicService.ts";
+import NewItemTile from "./newItemTile.vue";
 
 export default {
   name: "NewArtistTile",

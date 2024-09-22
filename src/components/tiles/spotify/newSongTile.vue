@@ -6,22 +6,16 @@
     v-bind:images="song.album.images"
     v-bind:genres="song.artists.map((artist) => artist.name)"
     v-bind:selected="selected"
+    v-bind:show-checkmark="finished || this.song.downloaded"
     type="track"
     @click="onSelect"
   >
-    <template #top-right-image>
-      <img
-        src="@/assets/checkmark.png"
-        alt="checkmark"
-        v-if="finished || this.song.downloaded"
-      />
-    </template>
   </NewItemTile>
 </template>
 
 <script>
-import MusicService from "../../services/MusicService.ts";
-import NewItemTile from "./NewItemTile.vue";
+import MusicService from "../../../services/MusicService.ts";
+import NewItemTile from "./newItemTile.vue";
 
 export default {
   name: "NewSongTile",
@@ -37,7 +31,7 @@ export default {
   methods: {
     onSelect: function () {
       this.selected = true;
-      MusicService.addSong(this.song.id).then(() => {
+      MusicService.addSong(this.song.id, false).then(() => {
         this.selected = false;
         this.finished = true;
       });

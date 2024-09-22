@@ -2,16 +2,23 @@
 import http from "./HttpService.ts";
 
 class MusicService {
-  fetchNewArtist(name) {
+  searchNewArtists(name) {
     return http
       .get("/artists/search", { params: { name: name } })
       .then((response) => {
         return response.data;
       });
   }
-  fetchNewSongs(name) {
+  searchNewSongs(name) {
     return http
       .get("/songs/search", { params: { name: name } })
+      .then((response) => {
+        return response.data;
+      });
+  }
+  searchNewYoutubeSongs(name) {
+    return http
+      .get("/songs/search/youtube", { params: { name: name } })
       .then((response) => {
         return response.data;
       });
@@ -23,10 +30,12 @@ class MusicService {
         return response.data;
       });
   }
-  addSong(id) {
-    return http.get("/songs/add", { params: { id_: id } }).then((response) => {
-      return response.data;
-    });
+  addSong(id, youtube) {
+    return http
+      .get("/songs/add", { params: { id_: id, youtube: youtube } })
+      .then((response) => {
+        return response.data;
+      });
   }
   ChangeArtist(id) {
     return http
@@ -48,9 +57,11 @@ class MusicService {
   }
 
   fetchArtists(offset) {
-    return http.get("/artists", {params: {offset: offset}}).then((response) => {
-      return response.data;
-    });
+    return http
+      .get("/artists", { params: { offset: offset } })
+      .then((response) => {
+        return response.data;
+      });
   }
 }
 
