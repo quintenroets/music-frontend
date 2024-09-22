@@ -12,9 +12,9 @@
   >
     <template #between>
       <div class="mr-4">
-        YouTube
-        <div class="flex justify-center w-full">
-          <label class="h-9 w-16 relative inline-block">
+        <div class="text-sm">YouTube</div>
+        <div class="flex justify-center w-full my-1">
+          <label class="h-6 w-12 relative inline-block">
             <input type="checkbox" v-model="youtube" class="w-0 h-0" />
             <span
               class="slider bg-gray-300 cursor-pointer round absolute top-0 left-0 right-0 bottom-0"
@@ -67,8 +67,8 @@ export default {
 .slider:before {
   position: absolute;
   content: "";
-  width: 26px;
-  height: 26px;
+  width: 14px;
+  height: 14px;
   left: 6px;
   bottom: 5px;
   background-color: white;
@@ -85,9 +85,7 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  transform: translateX(22px);
 }
 
 .slider.round {

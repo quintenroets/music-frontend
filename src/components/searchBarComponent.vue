@@ -2,6 +2,9 @@
   <div>
     <h3 class="mt-4 mb-8">Search new {{ itemName }}</h3>
     <div class="justify-center grid grid-cols-[1fr_auto_1fr]">
+      <div class="col-start-1 flex justify-end items-end h-12 mr-4">
+        <slot name="between" />
+      </div>
       <div class="col-start-2">
         <input
           aria-label="search"
@@ -12,7 +15,7 @@
           v-on:keydown.enter="onInput"
         />
       </div>
-      <div class="col-start-3 flex justify-between items-end h-12 ml-4">
+      <div class="col-start-3 flex justify-start items-end ml-4">
         <div class="vl-parent self-center">
           <loading
             :active="waiting"
@@ -20,9 +23,7 @@
             color="white"
             :height="30"
           />
-          <div />
         </div>
-        <slot name="between" />
       </div>
     </div>
   </div>
