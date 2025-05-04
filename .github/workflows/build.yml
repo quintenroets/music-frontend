@@ -2,15 +2,13 @@ name: Build
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
 
 jobs:
-  build:
-    permissions:
-      contents: write  # Needed for GitHub publishing
+  validate:
+    name: Validate
     runs-on: ubuntu-latest
     steps:
-      - name: Publish npm project to GitHub
-        uses: quintenroets/actions/publish/npm@main
+      - name: Validate
+        id: validate
+        run: make -s validate
+        shell: bash
