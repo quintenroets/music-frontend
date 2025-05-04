@@ -9,6 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Validate
-        id: validate
-        run: make -s validate
-        shell: bash
+        uses: quintenroets/actions/validate/npm@main
