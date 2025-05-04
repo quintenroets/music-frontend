@@ -1,0 +1,5 @@
+validate:
+	npm install
+	npm run format
+	npm run lint
+	npm run build
