@@ -54,7 +54,7 @@ export default {
   data: function () {
     return {
       waiting: false,
-      newItems: {},
+      newItems: [],
       recommendedItems: [],
       waitingRecommendations: true,
       newInput: null,

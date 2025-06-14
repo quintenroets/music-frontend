@@ -1,7 +1,7 @@
 <template>
   <NewItemView
-    :fetch-function="MusicService().searchNewArtists"
-    :fetch-recommendations-function="MusicService().fetchRecommendedArtists"
+    :fetch-function="MusicService.searchNewArtists"
+    :fetch-recommendations-function="MusicService.fetchRecommendedArtists"
     item-name="artist"
     :item-component="NewArtistTile"
   />
@@ -21,11 +21,6 @@ export default {
   },
   components: {
     NewItemView,
-  },
-  methods: {
-    MusicService() {
-      return MusicService;
-    },
   },
 };
 </script>
