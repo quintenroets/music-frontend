@@ -25,24 +25,22 @@ class MusicService {
   }
   addArtist(id, name) {
     return http
-      .get("/artists/add", { params: { id_: id, name: name } })
+      .post("/artists/add", { id_: id, name: name })
       .then((response) => {
         return response.data;
       });
   }
   addSong(id, youtube) {
     return http
-      .get("/songs/add", { params: { id_: id, youtube: youtube } })
+      .post("/songs/add", { id_: id, youtube: youtube })
       .then((response) => {
         return response.data;
       });
   }
-  ChangeArtist(id) {
-    return http
-      .get("/artists/toggle", { params: { id_: id } })
-      .then((response) => {
-        return response.data;
-      });
+  changeArtist(id) {
+    return http.post("/artists/toggle", { id_: id }).then((response) => {
+      return response.data;
+    });
   }
 
   fetchRecommendedArtists() {

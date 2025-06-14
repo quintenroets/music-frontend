@@ -1,14 +1,12 @@
 <template>
   <NewItemView
     :fetch-function="
-      youtube
-        ? musicService().searchNewYoutubeSongs
-        : musicService().searchNewSongs
+      youtube ? MusicService.searchNewYoutubeSongs : MusicService.searchNewSongs
     "
     item-name="song"
     :item-component="youtube ? NewYoutubeSongTile : NewSongTile"
     :recommended-item-component="NewSongTile"
-    :fetch-recommendations-function="musicService().fetchRecommendedSongs"
+    :fetch-recommendations-function="MusicService.fetchRecommendedSongs"
   >
     <template #between>
       <div class="mr-4">
@@ -33,7 +31,7 @@ import NewSongTile from "@/components/tiles/spotify/newSongTile.vue";
 import NewYoutubeSongTile from "@/components/tiles/youtube/newSongTile.vue";
 
 export default {
-  name: "NewArtist",
+  name: "NewSong",
   computed: {
     NewSongTile() {
       return NewSongTile;
@@ -49,11 +47,6 @@ export default {
     return {
       youtube: false,
     };
-  },
-  methods: {
-    musicService() {
-      return MusicService;
-    },
   },
 };
 </script>
