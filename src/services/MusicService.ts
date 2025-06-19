@@ -37,7 +37,7 @@ class MusicService {
         return response.data;
       });
   }
-  ChangeArtist(id) {
+  changeArtist(id) {
     return http
       .get("/artists/toggle", { params: { id_: id } })
       .then((response) => {

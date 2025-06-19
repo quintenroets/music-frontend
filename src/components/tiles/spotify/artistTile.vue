@@ -33,7 +33,7 @@ export default {
   methods: {
     onSelect: function () {
       this.selected = true;
-      MusicService.ChangeArtist(this.artist.id).then(() => {
+      MusicService.changeArtist(this.artist.id).then(() => {
         this.selected = false;
         this.favorite = !this.favorite;
       });
