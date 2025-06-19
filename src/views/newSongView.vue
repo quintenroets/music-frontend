@@ -33,7 +33,7 @@ import NewSongTile from "@/components/tiles/spotify/newSongTile.vue";
 import NewYoutubeSongTile from "@/components/tiles/youtube/newSongTile.vue";
 
 export default {
-  name: "NewArtist",
+  name: "NewSong",
   computed: {
     NewSongTile() {
       return NewSongTile;
