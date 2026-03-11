@@ -8,6 +8,7 @@
     "build": "vite build --config config/vite.config.js",
     "preview": "vite preview --config config/vite.config.js",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "test": "bun x playwright test tests/validate-routes.pw.js --config config/playwright.config.js",
     "format": "prettier --write .",
     "check-format": "prettier --check ."
   },
@@ -20,6 +21,7 @@
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@playwright/test": "1.57.0",
     "@vitejs/plugin-vue": "^5.0.0",
     "autoprefixer": "^10.4.15",
     "eslint": "^8.57.0",
