@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import ArtistTile from "../components/tiles/spotify/artistTile";
+import ArtistTile from "../components/tiles/spotify/artistTile.vue";
 import MusicService from "@/services/MusicService.ts";
 import Loading from "vue-loading-overlay";
 
