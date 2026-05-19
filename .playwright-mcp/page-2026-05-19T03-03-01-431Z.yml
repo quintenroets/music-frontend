@@ -1,0 +1,10 @@
+- generic [ref=e3]:
+  - navigation [ref=e5]:
+    - link "Songs" [ref=e6] [cursor=pointer]:
+      - /url: /
+    - link "Artists" [active] [ref=e7] [cursor=pointer]:
+      - /url: /artists
+    - link "New artists" [ref=e8] [cursor=pointer]:
+      - /url: /newartists
+  - generic "Loading" [ref=e36]:
+    - img [ref=e38]

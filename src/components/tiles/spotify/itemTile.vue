@@ -6,7 +6,7 @@
     v-bind:image="image"
     v-bind:genres="genres"
     v-bind:selected="selected"
-    :logo="require('@/assets/logo.png')"
+    :logo="logo"
     @logoClick="onShow"
   >
     <template #top-right-image>
@@ -17,9 +17,15 @@
 
 <script>
 import ItemTile from "./../itemTile.vue";
+import logo from "@/assets/logo.png";
 
 export default {
   name: "itemTile",
+  data() {
+    return {
+      logo,
+    };
+  },
   props: {
     id: { type: String },
     name: { type: String },

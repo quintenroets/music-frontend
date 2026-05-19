@@ -3,7 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
-import { DEV_PORT } from "./dev-port.js";
+import { DEV_PORT, BACKEND_PORT } from "./dev-port.js";
 
 export default defineConfig({
   plugins: [vue()],
@@ -16,5 +16,14 @@ export default defineConfig({
       ],
     },
   },
-  server: { port: DEV_PORT },
+  server: {
+    port: DEV_PORT,
+    proxy: {
+      "/api": {
+        target: `http://localhost:${BACKEND_PORT}`,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });
