@@ -126,6 +126,7 @@ dist
 
 # Playwright
 test-results/
+.playwright-mcp/
 
 # yarn v2
 .yarn/cache
