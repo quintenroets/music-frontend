@@ -5,7 +5,7 @@
     v-bind:duration="song.duration"
     v-bind:image="image"
     v-bind:selected="selected"
-    :logo="require('@/assets/youtube.png')"
+    :logo="logo"
     type="track"
     @click="onSelect"
     @logoClick="onShow"
@@ -19,6 +19,7 @@
 <script>
 import MusicService from "../../../services/MusicService.ts";
 import ItemTile from "./../itemTile.vue";
+import logo from "@/assets/youtube.png";
 
 export default {
   name: "NewYoutubeSongTile",
@@ -29,6 +30,7 @@ export default {
     return {
       selected: false,
       finished: false,
+      logo,
     };
   },
   methods: {

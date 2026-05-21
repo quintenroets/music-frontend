@@ -10,19 +10,17 @@ const routes = [
   {
     path: "/artists",
     name: "Artists",
-    component: () =>
-      import(/* webpackChunkName: "artists" */ "../views/artistsView.vue"),
+    component: () => import("../views/artistsView.vue"),
   },
   {
     path: "/newartists",
     name: "New Artists",
-    component: () =>
-      import(/* webpackChunkName: "newartists" */ "../views/newArtistView.vue"),
+    component: () => import("../views/newArtistView.vue"),
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 

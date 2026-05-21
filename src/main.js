@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import { createHead } from "unhead";
+import { createHead } from "@unhead/vue";
 import router from "./router";
 
 import "@/assets/css/tailwind.css";

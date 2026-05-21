@@ -1,8 +1,28 @@
+install:
+	bun install
+	npx playwright install --with-deps
+
+serve:
+	bun run dev
+
+preview:
+	bun run preview
+
+lint:
+	bun run lint
+
+format:
+	@bun run check-format || { code=$$?; bun run format; exit $$code; }
+
+test:
+	bun run test
+
 validate:
-	npm install
-	@npm run check-format || { code=$$?; npm run format; exit $$code; }
-	npm run lint
+	make install
+	make format
+	make lint
 	make build
+	make test
 
 build:
-	npm run build
+	bun run build
