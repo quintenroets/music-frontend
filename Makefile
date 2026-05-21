@@ -1,6 +1,5 @@
 install:
 	bun install
-	npx playwright install --with-deps
 
 serve:
 	bun run dev
@@ -15,6 +14,7 @@ format:
 	@bun run check-format || { code=$$?; bun run format; exit $$code; }
 
 test:
+	npx playwright install --with-deps
 	bun run test
 
 validate:
